@@ -7,5 +7,5 @@ module.exports = function(sequelize, DataTypes) {
         school: DataTypes.STRING,
         professor: DataTypes.STRING
     });
-    return NotesPost;
+    return Notes;
 };
