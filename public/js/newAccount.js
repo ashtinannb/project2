@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // references from input/form
-    var signUp = $("#signup");
+    var signUserUp = $("#signup");
     var userEmail = $("input#user-email");
     var userPassword = $("input#user-password");
     var passwordMatch = $("input#password-match");
