@@ -6,11 +6,11 @@
 
 -- NOTES SEED/TEST DATA
 
-INSERT INTO notes (author, studySubject, class, school, professor, notesBody)
-VALUES ("Varric Tethras", "Economics", "Econ II", "Kirkwall U", "Mordin Solus", "Here is a test note body.");
+INSERT INTO notes (title, author, studySubject, subSubject, className, school, professor, notesBody)
+VALUES ("Notes for 10/3/20 class", "Varric Tethras", "Economics", "Econ II", "", "Kirkwall U", "Mordin Solus", "Here is a test note body.");
 
-INSERT INTO notes (author, studySubject, class, school, professor, notesBody)
-VALUES ("Aloy", "Biology", "Senior Seminar: Flora and Fauna of Prehistoric Eurasia", "Kirkwall U", "Silens", "Here is a test note body");
+INSERT INTO notes (title, author, studySubject, subSubject, className, school, professor, notesBody)
+VALUES ("Unit 5: Deadliest Biomachines of the Tibetan Plateau", "Aloy", "Biology", "", "Senior Seminar: Flora and Fauna of Prehistoric Eurasia", "Kirkwall U", "Silens", "Here is a test note body");
 
 
 
