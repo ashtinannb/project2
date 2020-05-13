@@ -3,8 +3,21 @@
 
 -- The first three sections of this entry examine a broad selection of problems considered to be metaphysical and discuss ways in which the purview of metaphysics has expanded over time. We shall see that the central problems of metaphysics were significantly more unified in the Ancient and Medieval eras. Which raises a question—is there any common feature that unites the problems of contemporary metaphysics? The final two sections discuss some recent theories of the nature and methodology of metaphysics. We will also consider arguments that metaphysics, however defined, is an impossible enterprise. (source: https://plato.stanford.edu/entries/metaphysics/");
 
+
+-- NOTES SEED/TEST DATA
+
 INSERT INTO notes (author, studySubject, class, school, professor, notesBody)
 VALUES ("Varric Tethras", "Economics", "Econ II", "Kirkwall U", "Mordin Solus", "Here is a test note body.");
 
 INSERT INTO notes (author, studySubject, class, school, professor, notesBody)
 VALUES ("Aloy", "Biology", "Senior Seminar: Flora and Fauna of Prehistoric Eurasia", "Kirkwall U", "Silens", "Here is a test note body");
+
+
+
+-- USERS SEED/TEST DATA
+
+INSERT INTO users (email, password, name, profileImage)
+VALUES ("aloy@horizonzerodawn.com", "xe8f77656s", "Aloy", "https://i.pinimg.com/564x/fa/d8/63/fad8633ffb861d652ceb3b486a8f4919.jpg");
+
+
+
