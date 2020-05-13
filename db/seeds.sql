@@ -16,8 +16,10 @@ VALUES ("Aloy", "Biology", "Senior Seminar: Flora and Fauna of Prehistoric Euras
 
 -- USERS SEED/TEST DATA
 
-INSERT INTO users (email, password, name, profileImage)
-VALUES ("aloy@horizonzerodawn.com", "xe8f77656s", "Aloy", "https://i.pinimg.com/564x/fa/d8/63/fad8633ffb861d652ceb3b486a8f4919.jpg");
+INSERT INTO users (email, password, name, profileImage, createdAt, updatedAt)
+VALUES ("aloy@horizonzerodawn.com", "xe8f77656s", "Aloy", "https://i.pinimg.com/564x/fa/d8/63/fad8633ffb861d652ceb3b486a8f4919.jpg", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
-
+INSERT INTO Users (email, password, name, profileImage, createdAt, updatedAt)
+VALUES
+	("test@email.com", "hashedpw", "Test User", "TestImage.png", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
