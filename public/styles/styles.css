@@ -1,6 +1,6 @@
 /* index.html */
 body{
-  background-color: #15158F;
+  background-color: navy;
 
 
 }
@@ -12,5 +12,6 @@ body{
 .jumbotron{
   text-align: center;
   padding: 180px;
+  color: antiquewhite;
 }
 
