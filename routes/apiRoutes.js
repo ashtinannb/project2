@@ -10,11 +10,6 @@ module.exports = function(app) {
     });
 
 
-
-
-
-    // ***** IN PROGRESS *****
-
     // Get notes by author
     app.get("/api/notes/:author", function(req, res) {
         db.Notes.findAll({
@@ -61,7 +56,16 @@ module.exports = function(app) {
 
     // Create a new notes post
     app.post("/api/notes", function(req, res) {
-        db.Notes.create(req.body).then(function(dbNotes) {
+        db.Notes.create({
+            title: req.body.title,
+            author: req.body.author,
+            studySubject: req.body.studySubject,
+            subSubject: req.body.subSubject,
+            className: req.body.className,
+            school: req.body.school,
+            professor: req.body.professor,
+            notesBody: req.body.notesBody
+        }).then(function(dbNotes) {
             res.json(dbNotes);
         });
     });

@@ -1,5 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
     var Notes = sequelize.define("Notes", {
+
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+
         author: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -16,12 +25,17 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
 
-        class: {
+        subSubject: {
             type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    len: [1]
-                }
+            allowNull: true
+        },
+
+        className: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
         },
 
         school: {
