@@ -17,7 +17,11 @@ module.exports = function(app) {
 
     // Get notes by author
     app.get("/api/notes/:author", function(req, res) {
-        db.Notes.findAll({}).then(function(dbNotes) {
+        db.Notes.findAll({
+            where: {
+                author: req.params.author
+            }
+        }).then(function(dbNotes) {
             res.json(dbNotes);
         });
     });
@@ -35,14 +39,22 @@ module.exports = function(app) {
 
     // Get notes by professor
     app.get("/api/notes/:professor", function(req, res) {
-        db.Notes.findAll({}).then(function(dbNotes) {
+        db.Notes.findAll({
+            where: {
+                professor: req.params.professor
+            }
+        }).then(function(dbNotes) {
             res.json(dbNotes);
         });
     });
 
     // Get notes by class
     app.get("/api/notes/:class", function(req, res) {
-        db.Notes.findAll({}).then(function(dbNotes) {
+        db.Notes.findAll({
+            where: {
+                class: req.params.class
+            }
+        }).then(function(dbNotes) {
             res.json(dbNotes);
         });
     });
