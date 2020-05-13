@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "root",
-        "password": "Aureate*13",
+        "password": null,
         "database": "notes_db",
         "host": "localhost",
         "dialect": "mysql"
