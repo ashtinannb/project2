@@ -34,22 +34,15 @@ $(document).ready(function() {
 
         console.log(newNotes);
 
-        // If we're updating a post run updatePost to update a post
-        // Otherwise run submitNotes to create a whole new post
-        // if (updating) {
-        //     newNotes.id = notesID;
-        //     updatePost(newNotes);
-        // } else {
-
         submitNotes(newNotes);
 
         // }
     });
 
-    // Submits a new notes post and brings user to notes API page upon completion
+    // Submits a new notes post and brings user to Notes repository
     function submitNotes(Notes) {
         $.post("/api/notes/", Notes, function() {
-            window.location.href = "/my-notes";
+            window.location.href = "/notes";
         });
     }
 
