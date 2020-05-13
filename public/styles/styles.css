@@ -1,3 +1,16 @@
-.list-group-item {
-  line-height: 2.5;
+/* index.html */
+body{
+  background-color: #15158F;
+
+
 }
+.navbar{
+  padding: 40px;
+  
+}
+
+.jumbotron{
+  text-align: center;
+  padding: 180px;
+}
+
