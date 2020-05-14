@@ -7,8 +7,16 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/index.html"));
     });
 
-    app.get("/test", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/test.html"));
+    app.get("/post-your-notes", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/post-your-notes.html"));
+    });
+
+    app.get("/search", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/search.html"));
+    });
+
+    app.get("/notes", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/notes.html"));
     });
 
 

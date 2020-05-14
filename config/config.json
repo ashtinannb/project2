@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "root",
-        "password": null,
+        "password": "",
         "database": "notes_db",
         "host": "localhost",
         "dialect": "mysql"
