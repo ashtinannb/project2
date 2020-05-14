@@ -15,6 +15,10 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/search.html"));
     });
 
+    app.get("/notes", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/notes.html"));
+    });
+
 
     // *************************** BOILERPLATE TO FIX OR REMOVE AS NEEDED *******************
 

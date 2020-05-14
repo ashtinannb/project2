@@ -1,25 +1,4 @@
 $(document).ready(function() {
-    // Gets an optional query string from our url (i.e. ?post_id=23)
-    // var url = window.location.search;
-    // var notesID;
-
-    // Sets a flag for whether or not we're updating a post to be false initially
-    // var updating = false;
-
-    // If we have this section in our url, we pull out the post id from the url
-    // In localhost:8080/cms?post_id=1, notesID is 1
-    // if (url.indexOf("?post_id=") !== -1) {
-    //     notesID = url.split("=")[1];
-    //     getNotesData(notesID);
-    // }
-
-
-
-
-
-    // Adding an event listener for when the form is submitted
-
-    // $(notesForm).on("submit", function handleFormSubmit(event) {
 
     $("#post-your-notes").on("click", function handleFormSubmit(event) {
         event.preventDefault();
@@ -55,22 +34,15 @@ $(document).ready(function() {
 
         console.log(newNotes);
 
-        // If we're updating a post run updatePost to update a post
-        // Otherwise run submitNotes to create a whole new post
-        // if (updating) {
-        //     newNotes.id = notesID;
-        //     updatePost(newNotes);
-        // } else {
-
         submitNotes(newNotes);
 
         // }
     });
 
-    // Submits a new notes post and brings user to notes API page upon completion
+    // Submits a new notes post and brings user to Notes repository
     function submitNotes(Notes) {
         $.post("/api/notes/", Notes, function() {
-            window.location.href = "/api/notes";
+            window.location.href = "/notes";
         });
     }
 
