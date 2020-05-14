@@ -36,15 +36,32 @@ $(document).ready(function() {
 
         submitNotes(newNotes);
 
+        displayNotes(newNotes);
+
         // }
     });
 
     // Submits a new notes post and brings user to Notes repository
     function submitNotes(Notes) {
         $.post("/api/notes/", Notes, function() {
+            displayNotes();
             window.location.href = "/notes";
         });
     }
+
+    function displayNotes(data) {
+        var notesDiv = $("<div>");
+
+        var noteTitle = data[0].title
+        var noteAuthor = data[0]
+        var noteSubject
+        var noteSubSubject
+        var noteClassName
+        var noteSchool
+        var noteProfessor
+        var noteText
+    }
+
 
     // // Gets post data for a post if we're editing
     // function getNotesData(id) {
