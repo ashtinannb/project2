@@ -16,24 +16,3 @@ body{
   background-color: navy;
 }
 
-.card-img-top {
-  height: 400px;
-  width: 500px;
-}
-
-.cardL {
-  height: 550px;
-  width: 500px;
-text-align: center;
-float: right;
-background-color: whitesmoke;
-
-}
-
-.cardR {
-  height: 550px;
-  width: 500px;
-text-align: center;
-float: left;
-background-color: whitesmoke;
-}
