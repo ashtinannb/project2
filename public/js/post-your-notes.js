@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
     var url = window.location.search;
-    console.log(url);
 
     var notesId;
     var updating = false;
@@ -9,7 +8,6 @@ $(document).ready(function() {
     if (url.indexOf("?id=") !== -1) {
         notesId = url.split("=")[1];
         getNotesData(notesId);
-        console.log(notesId);
       }
 
       // Getting jQuery references to form and all fields:
@@ -26,8 +24,6 @@ $(document).ready(function() {
 
     $("#post-your-notes").on("click", function handleFormSubmit(event) {
         event.preventDefault();
-
-        
 
         // Won't submit the post if we are missing a body or a title
         if (!title.val().trim() || !notesBody.val().trim()) {
@@ -48,11 +44,20 @@ $(document).ready(function() {
 
         console.log(newNotes);
 
+        
+
+            // If we're updating a post run updatePost to update a post
+    // Otherwise run submitPost to create a whole new post
+    if (updating) {
+        newNotes.id = notesId;
+        updateNotes(newNotes);
+      }
+      else {
         submitNotes(newNotes);
+      }
 
-        displayNotes(newNotes);
+    //   displayNotes(newNotes);
 
-        // }
     });
 
     // Submits a new notes post and brings user to Notes repository
@@ -70,11 +75,8 @@ $(document).ready(function() {
                 // If this notes exists, prefill our cms forms with its data
 
                 author.val(data[0].author);
-
                 className.val(data[0].className);
-
                 title.val(data[0].title);
-                
                 notesBody.val(data[0].notesBody);
                 studySubject.val(data[0].studySubject);
                 subSubject.val(data[0].subSubject);
@@ -84,16 +86,17 @@ $(document).ready(function() {
                 // If we have a post with this id, set a flag for us to know to update the post
                 // when we hit submit
                 updating = true;
+
             }
         });
     }
 
-    // Update a given notes post, bring user to the blog page when done
+    // Update a given notes post, bring user to the notes page when done
     function updateNotes(notes) {
         $.ajax({
                 method: "PUT",
                 url: "/api/notes",
-                data: post
+                data: notes
             })
             .then(function() {
                 window.location.href = "/notes";
