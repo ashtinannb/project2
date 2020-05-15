@@ -2,20 +2,30 @@ $(document).ready(function() {
     // notesContainer holds all of our notes
     var notesContainer = $(".notes-repository");
     var notesSubjectSelect = $("#subject");
+    
 
     // Click events for the edit and delete buttons
     $(document).on("click", "button.delete", handleNotesDelete);
 
     $(document).on("click", "button.edit", handleNotesEdit);
 
+    $(document).on("click", "#search-for-authors", function() {
+      var author = $("#author-search").val();
+      getAuthorNotes(author);
+    });
+
     notesSubjectSelect.on("change", handleSubjectChange);
 
+    // $("#search-for-notes").on("click", getNotes);
 
+    // $("#search-for-authors").on("click", function() {
+    //   console.log(author);
+    // });
 
     var notes;
   
     // This function grabs notes from the database and updates the view
-    $("#search-for-notes").on("click", getNotes);
+
     
     function getNotes(subject) {
       var subjectString = subject || "";
@@ -26,7 +36,24 @@ $(document).ready(function() {
         console.log("Notes", data);
         notes = data;
         if (!notes || !notes.length) {
-          displayEmpty();
+          displayEmptySubject();
+        }
+        else {
+          initializeRows();
+        }
+      });
+    };
+
+    function getAuthorNotes(author) {
+      var authorString = author || "";
+      if (authorString) {
+        authorString = "/author/" + authorString;
+      }
+      $.get("/api/notes" + authorString, function(data) {
+        console.log("Notes", data);
+        notes = data;
+        if (!notes || !notes.length) {
+          displayEmptyAuthor();
         }
         else {
           initializeRows();
@@ -51,8 +78,7 @@ $(document).ready(function() {
 
 
 
-    // InitializeRows handles appending all of our constructed post HTML inside
-    // notesContainer
+    // Append notes to HTML container
     function initializeRows() {
       notesContainer.empty();
       var notesToAdd = [];
@@ -62,7 +88,7 @@ $(document).ready(function() {
       notesContainer.append(notesToAdd);
     }
   
-    // This function constructs a notes's HTML
+    // Build HTML for notes
     function createNewRow(notes) {
       var newNotesCard = $("<div>");
       newNotesCard.addClass("card");
@@ -94,7 +120,6 @@ $(document).ready(function() {
       var newNotesAuthor = $("<h4>");
       newNotesAuthor.text("Author: " + notes.author);
 
-
       newNotesSubject.text(notes.studySubject);
       newNotesSubject.css({
         float: "right",
@@ -103,21 +128,20 @@ $(document).ready(function() {
         "-15px"
       });
 
-
       var newNotesCardBody = $("<div>");
       newNotesCardBody.addClass("card-body");
-
 
       var newNotesBody = $("<h5>");
       newNotesTitle.text(notes.title + " ");
       newNotesBody.text(notes.notesBody);
 
-
       // var formattedDate = new Date(notes.createdAt);
       // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
       // newNotesDate.text(formattedDate);
       
+      // Build 
       newNotesTitle.append(newNotesDate);
+
       newNotesCardHeading.append(deleteBtn);
       newNotesCardHeading.append(editBtn);
       newNotesCardHeading.append(newNotesTitle);
@@ -134,8 +158,7 @@ $(document).ready(function() {
       return newNotesCard;
     }
   
-    // This function figures out which post we want to delete and then calls
-    // deleteNotes
+    // Determine note to be deleted; execute delete function
     function handleNotesDelete() {
       var currentNotes = $(this)
         .parent()
@@ -144,8 +167,7 @@ $(document).ready(function() {
       deleteNotes(currentNotes.id);
     }
   
-    // This function figures out which post we want to edit and takes it to the a ppropriate url
-
+    // Handles determining notes to edit and brings user to edit page with notes updates
     function handleNotesEdit() {
       var currentNotes = $(this)
         .parent()
@@ -154,20 +176,34 @@ $(document).ready(function() {
       window.location.href = "/post-your-notes?id=" + currentNotes.id;
     }
   
-    // This function displays a message when there are no notes
-
-    function displayEmpty() {
+    // This function displays a message when there are no notes for a given subject
+    function displayEmptySubject() {
       notesContainer.empty();
       var messageH2 = $("<h2>");
       messageH2.css({ "text-align": "center", "margin-top": "50px" });
-      messageH2.html("No one has created notes for this subject yet. <br> Want to create your own notes? Navigate <a href='/post-your-notes'>here</a> in order to create a new notes post.");
+      messageH2.html("No one has created notes for this subject yet. <br> Want to create your own notes? Click <a href='/post-your-notes'>here</a>.");
       notesContainer.append(messageH2);
     }
+
+        // This function displays a message when there are no notes for a given author
+        function displayEmptyAuthor() {
+          notesContainer.empty();
+          var messageH2 = $("<h2>");
+          messageH2.css({ "text-align": "center", "margin-top": "50px" });
+          messageH2.html("Sorry, looks like that author doesn't exist. <br> Search again.");
+          notesContainer.append(messageH2);
+        }
   
     // This function handles reloading new notes when the category changes
     function handleSubjectChange() {
       var newNotesSubject = $(this).val();
       getNotes(newNotesSubject);
+    }
+
+    // This function handles reloading new notes when the category changes
+    function handleAuthorChange() {
+      var newNotesAuthor = $(this).val();
+      getNotes(newNotesAuthor);
     }
   
   });
