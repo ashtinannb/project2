@@ -8,6 +8,7 @@ module.exports = function(app) {
     });
 
     app.get("/post-your-notes", function(req, res) {
+        console.log(req.query);
         res.sendFile(path.join(__dirname, "../public/post-your-notes.html"));
     });
 
