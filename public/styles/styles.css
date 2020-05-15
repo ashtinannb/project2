@@ -5,13 +5,17 @@ body{
 
 }
 .navbar{
-  padding: 40px;
+  padding: 20px;
   
 }
 
+
 .jumbotron{
   text-align: center;
-  padding: 180px;
-  color: antiquewhite;
+  padding: 50px;
+  color: whitesmoke;
+  background-color: navy;
 }
+
+
 
