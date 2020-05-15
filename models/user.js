@@ -1,16 +1,13 @@
 // Require bcrypt for password hashing
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 
-//user model with email, password, name and profile picture from URL only
+//user model with username, password, name
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define("User", {
-        email: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate: {
-                isEmail: true
-            }
         },
         password: {
             type: DataTypes.STRING,
@@ -20,13 +17,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             defaultValue: "Anonymous",
             allowNull: true
-        },
-        profileImage: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isUrl: true,
-            },
         },
     });
 
@@ -44,11 +34,11 @@ module.exports = function(sequelize, DataTypes) {
         return bcrypt.compareSync(password, this.password);
     };
 
-    // User.associate = function(models) {
-    //     models.User.hasMany(models.notes, {
-    //         onDelete: "CASCADE"
-    //     })
-    // };
+     User.associate = function(models) {
+         models.User.hasMany(models.Notes, {
+             onDelete: "CASCADE"
+         })
+     };
 
     return User;
 };
