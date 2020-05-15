@@ -4,11 +4,11 @@ $(document).ready(function() {
     var notesSubjectSelect = $("#subject");
 
     // Click events for the edit and delete buttons
-    $(document).on("click", "button.delete", handlePostDelete);
+    $(document).on("click", "button.delete", handleNotesDelete);
 
     $(document).on("click", "button.edit", handleNotesEdit);
 
-    notesSubjectSelect.on("change", handleCategoryChange);
+    notesSubjectSelect.on("change", handleSubjectChange);
 
 
 
@@ -81,10 +81,18 @@ $(document).ready(function() {
 
       var newNotesTitle = $("<h2>");
       var newNotesDate = $("<small>");
+
       var newNotesSubject = $("<h5>");
+      newNotesSubject.text(notes.studySubject);
+
+      var newNotesClass = $("<h5>");
+      newNotesClass.text("Class: " + notes.className);
+
+      var newNotesProfessor = $("<h5>");
+      newNotesProfessor.text("Professor: " + notes.professor)
 
 
-      newNotesSubject.text(notes.subject);
+      newNotesSubject.text(notes.studySubject);
       newNotesSubject.css({
         float: "right",
         "font-weight": "700",
@@ -97,29 +105,34 @@ $(document).ready(function() {
       newNotesCardBody.addClass("card-body");
 
 
-      var newNotesBody = $("<p>");
+      var newNotesBody = $("<h5>");
       newNotesTitle.text(notes.title + " ");
       newNotesBody.text(notes.notesBody);
 
 
-      // var formattedDate = new Date(post.createdAt);
+      // var formattedDate = new Date(notes.createdAt);
       // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
       // newNotesDate.text(formattedDate);
+      
       newNotesTitle.append(newNotesDate);
       newNotesCardHeading.append(deleteBtn);
       newNotesCardHeading.append(editBtn);
       newNotesCardHeading.append(newNotesTitle);
       newNotesCardHeading.append(newNotesSubject);
+      newNotesCardHeading.append(newNotesClass);
+      newNotesCardHeading.append(newNotesProfessor);
+
       newNotesCardBody.append(newNotesBody);
       newNotesCard.append(newNotesCardHeading);
       newNotesCard.append(newNotesCardBody);
       newNotesCard.data("notes", notes);
+
       return newNotesCard;
     }
   
     // This function figures out which post we want to delete and then calls
     // deleteNotes
-    function handlePostDelete() {
+    function handleNotesDelete() {
       var currentNotes = $(this)
         .parent()
         .parent()
@@ -127,28 +140,28 @@ $(document).ready(function() {
       deleteNotes(currentNotes.id);
     }
   
-    // This function figures out which post we want to edit and takes it to the
-    // Appropriate url
+    // This function figures out which post we want to edit and takes it to the a ppropriate url
 
     function handleNotesEdit() {
       var currentNotes = $(this)
         .parent()
         .parent()
-        .data("post");
-      window.location.href = "/cms?post_id=" + currentNotes.id;
+        .data("notes");
+      window.location.href = "/post-your-notes?id=" + currentNotes.id;
     }
   
     // This function displays a message when there are no notes
+
     function displayEmpty() {
       notesContainer.empty();
       var messageH2 = $("<h2>");
       messageH2.css({ "text-align": "center", "margin-top": "50px" });
-      messageH2.html("No notes yet for this category, navigate <a href='/cms'>here</a> in order to create a new post.");
+      messageH2.html("No notes yet for this category, navigate <a href='/post-your-notes'>here</a> in order to create a new notes post.");
       notesContainer.append(messageH2);
     }
   
     // This function handles reloading new notes when the category changes
-    function handleCategoryChange() {
+    function handleSubjectChange() {
       var newNotesSubject = $(this).val();
       getNotes(newNotesSubject);
     }
