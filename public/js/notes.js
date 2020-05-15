@@ -151,7 +151,7 @@ $(document).ready(function() {
         .parent()
         .parent()
         .data("notes");
-      window.location.href = "/post-your-notes?id=" + currentNotes.id;
+      window.location.href = "/post-your-notes?notes_id=" + currentNotes.id;
     }
   
     // This function displays a message when there are no notes
@@ -160,7 +160,7 @@ $(document).ready(function() {
       notesContainer.empty();
       var messageH2 = $("<h2>");
       messageH2.css({ "text-align": "center", "margin-top": "50px" });
-      messageH2.html("No notes yet for this category, navigate <a href='/post-your-notes'>here</a> in order to create a new notes post.");
+      messageH2.html("No one has created notes for this subject yet. <br> Want to create your own notes? Navigate <a href='/post-your-notes'>here</a> in order to create a new notes post.");
       notesContainer.append(messageH2);
     }
   

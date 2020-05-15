@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+    var url - window.location.search;
+    var notesId;
+    var updating = false;
+
+    if (url.indexOf("?notes_id=") !== -1) {
+        notesId = url.split("=")[1];
+        getNotesData(notesId);
+      }
+
     $("#post-your-notes").on("click", function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -50,7 +59,7 @@ $(document).ready(function() {
 
     // Gets post data for a notes post if we're editing
     function getNotesData(id) {
-        $.get("/api/notes/" + id, function(data) {
+        $.get("/api/notes/id" + id, function(data) {
             if (data) {
                 // If this post exists, prefill our cms forms with its data
                 title.val(data.title);

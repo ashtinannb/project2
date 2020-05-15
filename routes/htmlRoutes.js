@@ -32,17 +32,22 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/login.html"));
     });
 
+    app.get("/my-notes", function(req, res) {
+        var author = notes.author;
+        res.sendFile(path.join(__dirname, "../public/notes/" + author));
+    });
+
 
     // *************************** BOILERPLATE TO FIX OR REMOVE AS NEEDED *******************
 
-    // // Load notes page and pass in a note post by id
-    app.get("/notes/:id", function(req, res) {
-        db.Notes.findOne({ where: { id: req.params.id } }).then(function(dbNotes) {
-            res.json("notes", {
-                notes: dbNotes
-            });
-        });
-    });
+    // // // Load notes page and pass in a note post by id
+    // app.get("/notes/:id", function(req, res) {
+    //     db.Notes.findOne({ where: { id: req.params.id } }).then(function(dbNotes) {
+    //         res.json("notes", {
+    //             notes: dbNotes
+    //         });
+    //     });
+    // });
 
     // Render 404 page for any unmatched routes
     app.get("*", function(req, res) {

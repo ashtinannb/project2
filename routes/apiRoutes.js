@@ -10,6 +10,18 @@ module.exports = function(app) {
     });
 
 
+        // Get notes by id
+        app.get("/api/notes/id/:id", function(req, res) {
+            db.Notes.findAll({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function(dbNotes) {
+                res.json(dbNotes);
+            });
+        });
+
+
     // Get notes by author
     app.get("/api/notes/author/:author", function(req, res) {
         db.Notes.findAll({
@@ -81,14 +93,14 @@ module.exports = function(app) {
         });
     });
 
-    // Delete a notes post by id
-    app.delete("/api/notes/id/:id", function(req, res) {
-        db.Notes.destroy({
-            where: {
-                id: req.params.id
-            }
-        }).then(function(dbNotes) {
-            res.json(dbNotes);
-        });
-    });
+    // // Delete a notes post by id
+    // app.delete("/api/notes/id/:id", function(req, res) {
+    //     db.Notes.destroy({
+    //         where: {
+    //             id: req.params.id
+    //         }
+    //     }).then(function(dbNotes) {
+    //         res.json(dbNotes);
+    //     });
+    // });
 };
