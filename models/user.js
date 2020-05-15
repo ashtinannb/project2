@@ -1,5 +1,5 @@
 // Require bcrypt for password hashing
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 
 //user model with email, password, name and profile picture from URL only
 module.exports = function(sequelize, DataTypes) {
