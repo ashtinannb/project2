@@ -1,28 +1,33 @@
 $(document).ready(function() {
 
-    var url - window.location.search;
+    var url = window.location.search;
+    console.log(url);
+
     var notesId;
     var updating = false;
 
-    if (url.indexOf("?notes_id=") !== -1) {
+    if (url.indexOf("?id=") !== -1) {
         notesId = url.split("=")[1];
         getNotesData(notesId);
+        console.log(notesId);
       }
+
+      // Getting jQuery references to form and all fields:
+
+      var title = $("#title");
+      var author = $("#author");
+      var studySubject = $("#core-subject");
+      var subSubject = $("#specific-subject");
+      var className = $("#class-name");
+      var school = $("#school");
+      var professor = $("#professor");
+      var notesBody = $("#notes-body");
+      var notesForm = $("#notes-form");
 
     $("#post-your-notes").on("click", function handleFormSubmit(event) {
         event.preventDefault();
 
-        // Getting jQuery references to form and all fields:
-
-        var title = $("#title");
-        var author = $("#author");
-        var studySubject = $("#core-subject");
-        var subSubject = $("#specific-subject");
-        var className = $("#class-name");
-        var school = $("#school");
-        var professor = $("#professor");
-        var notesBody = $("#notes-body");
-        var notesForm = $("#notes-form");
+        
 
         // Won't submit the post if we are missing a body or a title
         if (!title.val().trim() || !notesBody.val().trim()) {
@@ -59,12 +64,23 @@ $(document).ready(function() {
 
     // Gets post data for a notes post if we're editing
     function getNotesData(id) {
-        $.get("/api/notes/id" + id, function(data) {
+        $.get("/api/notes/id/" + id, function(data) {
+            console.log(data[0]);
             if (data) {
-                // If this post exists, prefill our cms forms with its data
-                title.val(data.title);
-                notesBody.val(data.body);
-                subjectSelect.val(data.subject);
+                // If this notes exists, prefill our cms forms with its data
+
+                author.val(data[0].author);
+
+                className.val(data[0].className);
+
+                title.val(data[0].title);
+                
+                notesBody.val(data[0].notesBody);
+                studySubject.val(data[0].studySubject);
+                subSubject.val(data[0].subSubject);
+                school.val(data[0].school);
+                professor.val(data[0].professor);
+                
                 // If we have a post with this id, set a flag for us to know to update the post
                 // when we hit submit
                 updating = true;
@@ -73,14 +89,14 @@ $(document).ready(function() {
     }
 
     // Update a given notes post, bring user to the blog page when done
-    function updatePost(post) {
+    function updateNotes(notes) {
         $.ajax({
                 method: "PUT",
                 url: "/api/notes",
                 data: post
             })
             .then(function() {
-                window.location.href = "/";
+                window.location.href = "/notes";
             });
     }
 });

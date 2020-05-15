@@ -151,7 +151,7 @@ $(document).ready(function() {
         .parent()
         .parent()
         .data("notes");
-      window.location.href = "/post-your-notes?notes_id=" + currentNotes.id;
+      window.location.href = "/post-your-notes?id=" + currentNotes.id;
     }
   
     // This function displays a message when there are no notes
