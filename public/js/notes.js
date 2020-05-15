@@ -89,7 +89,10 @@ $(document).ready(function() {
       newNotesClass.text("Class: " + notes.className);
 
       var newNotesProfessor = $("<h5>");
-      newNotesProfessor.text("Professor: " + notes.professor)
+      newNotesProfessor.text("Professor: " + notes.professor);
+
+      var newNotesAuthor = $("<h4>");
+      newNotesAuthor.text("Author: " + notes.author);
 
 
       newNotesSubject.text(notes.studySubject);
@@ -118,6 +121,7 @@ $(document).ready(function() {
       newNotesCardHeading.append(deleteBtn);
       newNotesCardHeading.append(editBtn);
       newNotesCardHeading.append(newNotesTitle);
+      newNotesCardHeading.append(newNotesAuthor);
       newNotesCardHeading.append(newNotesSubject);
       newNotesCardHeading.append(newNotesClass);
       newNotesCardHeading.append(newNotesProfessor);
@@ -147,7 +151,7 @@ $(document).ready(function() {
         .parent()
         .parent()
         .data("notes");
-      window.location.href = "/post-your-notes?id=" + currentNotes.id;
+      window.location.href = "/post-your-notes?notes_id=" + currentNotes.id;
     }
   
     // This function displays a message when there are no notes
@@ -156,7 +160,7 @@ $(document).ready(function() {
       notesContainer.empty();
       var messageH2 = $("<h2>");
       messageH2.css({ "text-align": "center", "margin-top": "50px" });
-      messageH2.html("No notes yet for this category, navigate <a href='/post-your-notes'>here</a> in order to create a new notes post.");
+      messageH2.html("No one has created notes for this subject yet. <br> Want to create your own notes? Navigate <a href='/post-your-notes'>here</a> in order to create a new notes post.");
       notesContainer.append(messageH2);
     }
   
