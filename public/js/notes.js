@@ -89,7 +89,10 @@ $(document).ready(function() {
       newNotesClass.text("Class: " + notes.className);
 
       var newNotesProfessor = $("<h5>");
-      newNotesProfessor.text("Professor: " + notes.professor)
+      newNotesProfessor.text("Professor: " + notes.professor);
+
+      var newNotesAuthor = $("<h4>");
+      newNotesAuthor.text("Author: " + notes.author);
 
 
       newNotesSubject.text(notes.studySubject);
@@ -118,6 +121,7 @@ $(document).ready(function() {
       newNotesCardHeading.append(deleteBtn);
       newNotesCardHeading.append(editBtn);
       newNotesCardHeading.append(newNotesTitle);
+      newNotesCardHeading.append(newNotesAuthor);
       newNotesCardHeading.append(newNotesSubject);
       newNotesCardHeading.append(newNotesClass);
       newNotesCardHeading.append(newNotesProfessor);
