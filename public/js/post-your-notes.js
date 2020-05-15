@@ -48,44 +48,30 @@ $(document).ready(function() {
         });
     }
 
-    // function displayNotes(data) {
-    //     var notesDiv = $("<div>");
+    // Gets post data for a notes post if we're editing
+    function getNotesData(id) {
+        $.get("/api/notes/" + id, function(data) {
+            if (data) {
+                // If this post exists, prefill our cms forms with its data
+                title.val(data.title);
+                notesBody.val(data.body);
+                subjectSelect.val(data.subject);
+                // If we have a post with this id, set a flag for us to know to update the post
+                // when we hit submit
+                updating = true;
+            }
+        });
+    }
 
-    //     var noteTitle = data[0].title
-    //     var noteAuthor = data[0]
-    //     var noteSubject
-    //     var noteSubSubject
-    //     var noteClassName
-    //     var noteSchool
-    //     var noteProfessor
-    //     var noteText
-    // }
-
-
-    // // Gets post data for a post if we're editing
-    // function getNotesData(id) {
-    //     $.get("/api/notes/" + id, function(data) {
-    //         if (data) {
-    //             // If this post exists, prefill our cms forms with its data
-    //             title.val(data.title);
-    //             notesBody.val(data.body);
-    //             subjectSelect.val(data.category);
-    //             // If we have a post with this id, set a flag for us to know to update the post
-    //             // when we hit submit
-    //             updating = true;
-    //         }
-    //     });
-    // }
-
-    // Update a given post, bring user to the blog page when done
-    // function updatePost(post) {
-    //     $.ajax({
-    //             method: "PUT",
-    //             url: "/api/notes",
-    //             data: post
-    //         })
-    //         .then(function() {
-    //             window.location.href = "/";
-    //         });
-    // }
+    // Update a given notes post, bring user to the blog page when done
+    function updatePost(post) {
+        $.ajax({
+                method: "PUT",
+                url: "/api/notes",
+                data: post
+            })
+            .then(function() {
+                window.location.href = "/";
+            });
+    }
 });
