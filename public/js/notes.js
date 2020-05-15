@@ -35,7 +35,7 @@ $(document).ready(function() {
     };
   
     // This function does an API call to delete notes
-    function deletePost(id) {
+    function deleteNotes(id) {
       $.ajax({
         method: "DELETE",
         url: "/api/notes/" + id
@@ -45,8 +45,12 @@ $(document).ready(function() {
         });
     }
   
+
     // Getting the initial list of notes
     getNotes();
+
+
+
     // InitializeRows handles appending all of our constructed post HTML inside
     // notesContainer
     function initializeRows() {
@@ -62,17 +66,24 @@ $(document).ready(function() {
     function createNewRow(notes) {
       var newNotesCard = $("<div>");
       newNotesCard.addClass("card");
+
       var newNotesCardHeading = $("<div>");
       newNotesCardHeading.addClass("card-header");
+
       var deleteBtn = $("<button>");
-      deleteBtn.text("x");
+      deleteBtn.text("DELETE");
       deleteBtn.addClass("delete btn btn-danger");
+
       var editBtn = $("<button>");
       editBtn.text("EDIT");
-      editBtn.addClass("edit btn btn-default");
+      editBtn.addClass("edit btn btn-primary");
+
+
       var newNotesTitle = $("<h2>");
       var newNotesDate = $("<small>");
       var newNotesSubject = $("<h5>");
+
+
       newNotesSubject.text(notes.subject);
       newNotesSubject.css({
         float: "right",
@@ -80,11 +91,17 @@ $(document).ready(function() {
         "margin-top":
         "-15px"
       });
+
+
       var newNotesCardBody = $("<div>");
       newNotesCardBody.addClass("card-body");
+
+
       var newNotesBody = $("<p>");
       newNotesTitle.text(notes.title + " ");
-      newNotesBody.text(notes.body);
+      newNotesBody.text(notes.notesBody);
+
+
       // var formattedDate = new Date(post.createdAt);
       // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
       // newNotesDate.text(formattedDate);
@@ -101,13 +118,13 @@ $(document).ready(function() {
     }
   
     // This function figures out which post we want to delete and then calls
-    // deletePost
+    // deleteNotes
     function handlePostDelete() {
       var currentNotes = $(this)
         .parent()
         .parent()
         .data("notes");
-      deletePost(currentNotes.id);
+      deleteNotes(currentNotes.id);
     }
   
     // This function figures out which post we want to edit and takes it to the
