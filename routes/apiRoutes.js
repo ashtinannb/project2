@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 
     // Get notes by author
-    app.get("/api/notes/:author", function(req, res) {
+    app.get("/api/notes/author/:author", function(req, res) {
         db.Notes.findAll({
             where: {
                 author: req.params.author
@@ -22,10 +22,10 @@ module.exports = function(app) {
     });
 
     // Get notes by subject
-    app.get("/api/notes/:subject", function(req, res) {
+    app.get("/api/notes/subject/:subject", function(req, res) {
         db.Notes.findAll({
             where: {
-                subject: req.params.subject
+                studySubject: req.params.subject
             }
         }).then(function(dbNotes) {
             res.json(dbNotes);
@@ -33,7 +33,7 @@ module.exports = function(app) {
     });
 
     // Get notes by professor
-    app.get("/api/notes/:professor", function(req, res) {
+    app.get("/api/notes/professor/:professor", function(req, res) {
         db.Notes.findAll({
             where: {
                 professor: req.params.professor
@@ -44,15 +44,26 @@ module.exports = function(app) {
     });
 
     // Get notes by class
-    app.get("/api/notes/:class", function(req, res) {
+    app.get("/api/notes/class/:class", function(req, res) {
         db.Notes.findAll({
             where: {
-                class: req.params.class
+                className: req.params.class
             }
         }).then(function(dbNotes) {
             res.json(dbNotes);
         });
     });
+
+        // Get notes by school
+        app.get("/api/notes/school/:school", function(req, res) {
+            db.Notes.findAll({
+                where: {
+                    school: req.params.school
+                }
+            }).then(function(dbNotes) {
+                res.json(dbNotes);
+            });
+        });
 
     // Create a new notes post
     app.post("/api/notes", function(req, res) {
@@ -71,7 +82,7 @@ module.exports = function(app) {
     });
 
     // Delete a notes post by id
-    app.delete("/api/notes/:id", function(req, res) {
+    app.delete("/api/notes/id/:id", function(req, res) {
         db.Notes.destroy({
             where: {
                 id: req.params.id
