@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 var db = require("../models");
-
+var passport = require("../config/passport");
 module.exports = function(app) {
 
   // Get all notes
@@ -16,7 +15,6 @@ module.exports = function(app) {
         res.json(dbUsers);
       });
     });
-
 
   // Get notes by id
   app.get("/api/notes/id/:id", function(req, res) {
@@ -87,8 +85,6 @@ module.exports = function(app) {
     });
   });
 
-
-
       // PUT route for updating notes
   app.put("/api/notes", function(req, res) {
     db.Notes.update(req.body,
@@ -113,18 +109,11 @@ module.exports = function(app) {
         });
     });
 
-
-
-
-
-
-
     app.get("/api/user/count/:name", function(req, res){
       db.User.count({
-        where: { email: req.params.name }
+        where: { username: req.params.name }
       })
         .then(result, function(req, res) {
-          // console.log(result);
           res.json(result);
         })
         .catch(function(err) {
@@ -133,72 +122,65 @@ module.exports = function(app) {
         });
     });
 
-
-app.post('/api/signup', (req, res) => {
-    db.User.create({
-      username: req.body.username,
-      password: req.body.password
-    })
-      .then(function() {
-        res.redirect(307, "/api/login");
-      })
-      .catch(function(err) {
-        console.log(err);
-        res.json(err);
+    app.post('/api/signup', function(req, res) {
+        db.User.create({
+          username: req.body.username,
+          password: req.body.password
+        })
+          .then(function() {
+            res.redirect(307, "/api/login");
+          })
+          .catch(function(err) {
+            console.log(err);
+            res.json(err);
+          });
       });
-  });
 
-
-  app.get("/api/user_data", (req, res) => {
-    if (!req.user) {
-      res.json({});
-    } else {
-      res.json({
-        user: { id: req.user.id, name: req.user.name }
-      });
-    }
-  }); 
-
-  app.get("/api/user/:id", (req, res) => {
-    db.User.findOne({
-      attributes: ["id", "name"],
-      where: {
-        id: req.params.id
+    app.get("/api/user_data", function(req, res) {
+      if (!req.user) {
+        res.json({});
+      } else {
+        res.json({
+          user: { id: req.user.id, name: req.user.name }
+        });
       }
-    }).then(name => {
-      res.json(name);
-    });
-  });
+    }); 
 
-  app.put("/api/user/name/:id", (req, res) => {
-    db.User.update(
-      {
-        name: req.body.name
-      },
-      {
+    app.get("/api/user/:id", function(req, res){
+      db.User.findOne({
+        attributes: ["id", "name"],
         where: {
           id: req.params.id
         }
-      }
-    ).then(name => {
-      res.json(name);
+      }).then(name => {
+        res.json(name);
+      });
     });
-  });
 
+    app.put("/api/user/name/:id", function(req, res) {
+      db.User.update(
+        {
+          name: req.body.name
+        },
+        {
+          where: {
+            id: req.params.id
+          }
+        }
+      ).then(name, function() {
+        res.json(name);
+      });
+    });
 
+    app.get("/logout", function(req, res) {
+      req.logout();
+      res.redirect("/");
+    });
 
-app.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
-  });
-
-
-    // Authenticate user
+      // Authenticate a user
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
       res.json("/user/profile");
-    }); 
-
-
+      }); 
 
 }
 
