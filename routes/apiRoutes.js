@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 var db = require("../models");
-var passport = require("passport");
+var passport = require("../config/passport");
 
 module.exports = function(app) {
 
@@ -24,7 +23,6 @@ module.exports = function(app) {
       res.json(dbNotes);
     });
   });
-
 
   // Get notes by id
   app.get("/api/notes/id/:id", function(req, res) {
@@ -102,8 +100,6 @@ module.exports = function(app) {
     });
   });
 
-
-
       // PUT route for updating notes
   app.put("/api/notes", function(req, res) {
     db.Notes.update(req.body,
@@ -127,9 +123,6 @@ module.exports = function(app) {
             res.json(dbNotes);
         });
     });
-
-
-
 
 
 //     app.get("/api/user/count/:name", function(req, res){
@@ -210,8 +203,6 @@ module.exports = function(app) {
 //     app.post("/api/login", passport.authenticate("local"), function(req, res) {
 //       res.json("/user/profile");
 //     }); 
-
-
 
 }
 
