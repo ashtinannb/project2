@@ -77,3 +77,29 @@ module.exports = function(app) {
   });
 };
 
+
+      // PUT route for updating notes
+  app.put("/api/notes", function(req, res) {
+    db.Notes.update(req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      })
+      .then(function(dbNotes) {
+        res.json(dbNotes);
+      });
+  });
+
+    // Delete a notes post by id
+    app.delete("/api/notes/:id", function(req, res) {
+        db.Notes.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(dbNotes) {
+            res.json(dbNotes);
+        });
+    });
+};
+

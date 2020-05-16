@@ -30,15 +30,15 @@
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
             <ul class="navbar-nav ml-auto text-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About Us</a>
+                    <a class="nav-link" href="about">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="howto.html">Features</a>
+                    <a class="nav-link" href="howto">Features</a>
                 </li>
             </ul>
         </div>
         <div class="mx-auto my-2 order-0 order-md-1 position-relative">
-            <a class="mx-auto" href="index.html">
+            <a class="mx-auto" href="/">
                 <img src="logo2.png" height="120" width="120" class="rounded-circle">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -48,11 +48,11 @@
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
             <ul class="navbar-nav mr-auto text-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="signup.html">Sign Up
+                    <a class="nav-link" href="signup">Sign Up
                 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
         </div>
@@ -64,16 +64,10 @@
         <h1 class="display-4">Notes Archive</h1>
     </div>
 
-    <div class="container">
-        <h3>Recently Added Notes:</h3>
-    </div>
-
-    <div class="container notes-repository">
-        <!-- Empty until populated with notes -->
-    </div>
 
     <div class="container">
-        <div class="row mt-4">
+        <div class="row md-4">
+
           <div class="col-md-4">
             <div class="form-group">
               <select class="custom-select" id="subject">
@@ -91,7 +85,17 @@
             </div>
           </div>
           <div class="col-md-2">
-            <a class="btn btn-light" id="search-for-notes">Search</a>
+            <!-- <a class="btn btn-light" id="search-for-notes">Search Subjects</a> -->
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter an author name" id="author-search">
+                <br>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-light" id="search-for-authors">Search Authors</a>
           </div>
         </div>
         <div class="row">
@@ -99,6 +103,17 @@
           </div>
         </div>
       </div>
+
+
+    <div class="container">
+        <h3>Recently Added Notes:</h3>
+    </div>
+
+    <div class="container notes-repository">
+        <!-- Empty until populated with notes -->
+    </div>
+
+
 
 
       <!-- jQuery -->
