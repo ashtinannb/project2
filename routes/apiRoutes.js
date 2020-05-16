@@ -22,10 +22,6 @@ module.exports = function(app) {
     });
   });
 
-
-
-  // ***** IN PROGRESS *****
-
   // Get notes by author
   app.get("/api/notes/:author", function(req, res) {
     db.Notes.findAll({}).then(function(dbNotes) {
@@ -75,7 +71,7 @@ module.exports = function(app) {
       res.json(dbNotes);
     });
   });
-};
+
 
 
       // PUT route for updating notes
@@ -101,5 +97,5 @@ module.exports = function(app) {
             res.json(dbNotes);
         });
     });
-};
+}
 
