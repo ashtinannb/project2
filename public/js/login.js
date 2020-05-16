@@ -31,7 +31,7 @@ $(document).ready(function() {
   });
   
   // post to api/login route and redirect to homepage
-  function loginUser(userData) {
+  function loginUser(username, password) {
     $.post("/api/login", {
       username: username,
       password: password
