@@ -49,27 +49,10 @@ $(document).ready(function() {
     // });
   });
       
-  
   // post to user route and redirect to notes page
   function submitUserData(User) {
-    $.post("/api/user", User, function()  {
+    $.post("/api/user", User, function() {
       window.location.href = "/";
     });
-      // .then(function(data) {
-      //   window.location.replace(data);
-      // })
-
-      //catch and alert any errors
-      // .catch(handleLoginErr);
-  }
-  
-  function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
-    $("#alert").fadeIn(500);
   }
 });
-  
-function alert(text){
-  $(".modal h1").html(text + "<br> Please Try Again");
-  $(".modal").toggleClass("is-active");
-}
