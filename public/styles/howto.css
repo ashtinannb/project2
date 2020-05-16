@@ -1,0 +1,11 @@
+.jumbotron{
+    padding: 20px;
+    text-align: center;
+    background-color: navy;
+    color: white;
+}
+
+.card{
+    display: inline-block;
+
+}
