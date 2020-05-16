@@ -56,7 +56,7 @@ $(document).ready(function() {
           initializeRows();
         }
       });
-    };
+    });
 
     function getAuthorNotes(author) {
       var authorString = author || "";
@@ -87,12 +87,8 @@ $(document).ready(function() {
       });
   }
   
-
   // Getting the initial list of notes
   getNotes();
-
-
-
 
     // Append notes to HTML container
     function initializeRows() {
@@ -107,7 +103,6 @@ $(document).ready(function() {
     notesContainer.append(notesToAdd);
   }
   
-
     // Build HTML for notes
     function createNewRow(notes) {
       var newNotesCard = $("<div>");
