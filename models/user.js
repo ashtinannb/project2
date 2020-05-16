@@ -13,12 +13,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        name: {
-            type: DataTypes.STRING,
-            defaultValue: "Anonymous",
-            allowNull: true
-        },
-    });
+    },{
+        timestamps: false
+      });
 
     // upon user creation, automatically hash their password
     User.beforeCreate(async function(user) {

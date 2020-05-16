@@ -1,56 +1,66 @@
 /* eslint-disable prettier/prettier */
 $(document).ready(function() {
   // references from input/form
-  var signUserUp = $("#signup");
-  var userName = $("#input#username");
-  var userPassword = $("input#user-password");
-  $(".modal-background").click(function(){
-    $(".modal").toggleClass("is-active");
-  });
+  // var signUserUp = $("#signup");
+  var userName = $("#username");
+  var userPassword = $("#user-password");
+  // $(".modal-background").click(function(){
+  //   $(".modal").toggleClass("is-active");
+  // });
+
   
   // validate to ensure forms are filled in
-  signUserUp.on("submit", function(event) {
+  // signUserUp.on("submit", function(event) {
+
+  $("#submit-account-info").on("click", function handleFormSubmit(event){
     event.preventDefault();
-    var userData = {
+
+    var newUser = {
       username: userName.val().trim().toLowerCase(),
       password: userPassword.val().trim(),
     };
 
 
-    console.log(userData.username);
-    var userCount = "/api/user/count/";
-    userCount += userData.username;
-    console.log(userCount);
-    $.get(userCount).then (function(result){
-      if (result === 1){
-        modalAlert("Username already exists.");
-      }else{
-        if (!userData.username || !userData.password) {
-          modalAlert("Please fill in email and password");
-          return;
-        }else{
-          // sign up user w/ username and password
-          signUserUp(userData.username, userData.password);
-          userName.val("");
-          userPassword.val("");
-        }
-      }
-    });
+    console.log(newUser.username);
+    console.log(newUser.password);
+
+    submitUserData(newUser);
+
+    // var userCount = "/api/user/count/";
+
+    // userCount += newUser.username;
+
+    // console.log(userCount);
+
+    // $.get(userCount).then (function(result){
+    //   if (result === 1){
+    //     alert("Username already exists.");
+    //   }else{
+    //     if (!newUser.username || !newUser.password) {
+    //       alert("Please fill in email and password");
+    //       return;
+    //     }else{
+    //       // sign up user w/ username and password
+    //       signUserUp(newUser.username, newUser.password);
+    //       userName.val("");
+    //       userPassword.val("");
+    //     }
+    //   }
+    // });
   });
       
   
-  // post to signup route and redirect to notes page
-  function signUserUp(username, password) {
-    $.post("/api/signup", {
-      username: username,
-      password: password
-    })
-      .then(function(data) {
-        window.location.replace(data);
-      })
+  // post to user route and redirect to notes page
+  function submitUserData(User) {
+    $.post("/api/user", User, function()  {
+      window.location.href = "/";
+    });
+      // .then(function(data) {
+      //   window.location.replace(data);
+      // })
 
       //catch and alert any errors
-      .catch(handleLoginErr);
+      // .catch(handleLoginErr);
   }
   
   function handleLoginErr(err) {
@@ -59,7 +69,7 @@ $(document).ready(function() {
   }
 });
   
-function modalAlert(text){
+function alert(text){
   $(".modal h1").html(text + "<br> Please Try Again");
   $(".modal").toggleClass("is-active");
 }

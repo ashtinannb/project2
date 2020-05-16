@@ -46,8 +46,9 @@ $(document).ready(function() {
 
         
 
-            // If we're updating a post run updatePost to update a post
+    // If we're updating a post run updatePost to update a post
     // Otherwise run submitPost to create a whole new post
+    
     if (updating) {
         newNotes.id = notesId;
         updateNotes(newNotes);
@@ -56,7 +57,7 @@ $(document).ready(function() {
         submitNotes(newNotes);
       }
 
-    //   displayNotes(newNotes);
+    displayNotes(newNotes);
 
     });
 
