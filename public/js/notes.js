@@ -42,7 +42,7 @@ $(document).ready(function() {
       console.log("Notes", data);
       notes = data;
       if (!notes || !notes.length) {
-        displayEmpty();
+        displayEmptySubject();
       }
 
       $.get("/api/notes" + subjectString, function(data) {
@@ -93,7 +93,6 @@ $(document).ready(function() {
   // Getting the initial list of notes
   getNotes();
 
-
   // Append notes to HTML container
   function initializeRows() {
     notesContainer.empty();
@@ -101,9 +100,8 @@ $(document).ready(function() {
     for (var i = 0; i < notes.length; i++) {
       notesToAdd.push(createNewRow(notes[i]));
     } notesContainer.append(notesToAdd);
-  } notesContainer.append(notesToAdd);
-  
-  
+  } //notesContainer.append(notesToAdd);
+
   // Build HTML for notes
   function createNewRow(notes) {
 
