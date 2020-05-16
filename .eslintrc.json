@@ -5,9 +5,7 @@
         "node": true
     },
     "extends": "prettier",
-    "plugins": [
-    
-      ],
+    "plugins": ["prettier"],
     "rules": {
         "no-duplicate-case":"error",
         "no-empty":"error",
