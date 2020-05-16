@@ -20,6 +20,9 @@ if (process.env.JAWSDB_URL) {
     });
 }
 
+connection.connect();
+module.exports = connection;
+
 var PORT = process.env.PORT || 3000;
 
 // Middleware
